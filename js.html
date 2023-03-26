@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <input type="button" value="right" onclick="move_picture('right')">
+    <input type="button" value="left" onclick="move_picture('left')">
+    <input type="button" value="up" onclick="move_picture('up')">
+    <input type="button" value="down" onclick="move_picture('down')">
+
+    <div id="main" style="border: solid blue; height: 700px; width: 1200px;">
+        <div id="box" style="top: 200px;
+    left: 500px;
+    position: absolute;">
+        <img id="myImage" src="right1.png" alt="" height="200px">
+    </div>
+    </div>
+    
+    <script>
+        function move_picture(d)
+        {
+            var main_div=document.getElementById('main');
+            var box_div=document.getElementById('box');
+            var main_width=main_div.offsetWidth;
+            var main_height=main_div.offsetHeight;
+            var box_width=box_div.offsetWidth;
+            var box_height=box_div.offsetHeight;
+            var box_left=box_div.offsetLeft;
+            var box_top=box_div.offsetTop;
+            
+            // change image src based on direction
+            if (d=='right'){
+                document.getElementById('myImage').src='right1.png';
+                var new_left=box_left+100;
+                if ((new_left+box_width)<=main_width){
+                    document.getElementById('box').style.left=new_left+'px';  
+                }
+            }  
+
+            if (d=='left'){
+                document.getElementById('myImage').src='left.png';
+                var new_left=box_left-100;
+                if (new_left>=0){
+                    document.getElementById('box').style.left=new_left+'px';  
+                }
+            } 
+
+            if (d=='up'){
+                document.getElementById('myImage').src='up.png';
+                var new_top=box_top-100;
+                if (new_top>=0){
+                    document.getElementById('box').style.top=new_top+'px';  
+                }
+            } 
+
+            if (d=='down'){
+                document.getElementById('myImage').src='down.png';
+                var new_top=box_top+100;
+                if ((new_top+box_height)<=main_height){
+                    document.getElementById('box').style.top=new_top+'px';  
+                }
+            } 
+
+            
+        }
+
+        // add event listeners to the document object to listen for keydown events
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode == 37) {
+                // left arrow key
+                move_picture('left');
+            }
+            else if (event.keyCode == 38) {
+                // up arrow key
+                move_picture('up');
+            }
+            else if (event.keyCode == 39) {
+                // right arrow key
+                move_picture('right');
+            }
+            else if (event.keyCode == 40) {
+                // down arrow key
+                move_picture('down');
+            }
+        });
+    </script>
+</body>
+</html>
